@@ -1,0 +1,33 @@
+site_name: Fleepr CLI
+theme:
+  name: material
+  logo:
+    icon: cloud_circle
+  palette:
+    primary: "Deep Blue"
+    accent: "Light Blue"
+nav:
+  - Home: "README.md"
+  - Reference Guide: "fleepr.md"
+repo_name: "dciangot/fleepr"
+repo_url: "https://github.com/dciangot/fleepr"
+
+extra:
+  social:
+    - type: "github"
+      link: "https://github.com/dciangot/fleepr"
+    #- type: "slack"
+    #  link: "https://dodas-infn.slack.com/archives/CAJ6VG71A"
+
+markdown_extensions:
+  - codehilite
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
