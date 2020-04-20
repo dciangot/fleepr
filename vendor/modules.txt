@@ -16,10 +16,10 @@ github.com/Azure/azure-sdk-for-go/services/resources/mgmt/2016-02-01/resources
 github.com/Azure/azure-sdk-for-go/services/storage/mgmt/2016-01-01/storage
 github.com/Azure/azure-sdk-for-go/storage
 github.com/Azure/azure-sdk-for-go/version
-# github.com/Azure/go-autorest/autorest v0.9.3-0.20191028180845-3492b2aff503 => github.com/Azure/go-autorest/autorest v0.9.7
+# github.com/Azure/go-autorest/autorest v0.9.3-0.20191028180845-3492b2aff503 => github.com/Azure/go-autorest/autorest v0.9.2
 github.com/Azure/go-autorest/autorest
 github.com/Azure/go-autorest/autorest/azure
-# github.com/Azure/go-autorest/autorest/adal v0.8.2
+# github.com/Azure/go-autorest/autorest/adal v0.8.1-0.20191028180845-3492b2aff503
 github.com/Azure/go-autorest/autorest/adal
 # github.com/Azure/go-autorest/autorest/azure/cli v0.2.0
 github.com/Azure/go-autorest/autorest/azure/cli
@@ -360,7 +360,7 @@ github.com/gophercloud/gophercloud/pagination
 github.com/gophercloud/utils/openstack/clientconfig
 # github.com/hashicorp/aws-sdk-go-base v0.4.0
 github.com/hashicorp/aws-sdk-go-base
-# github.com/hashicorp/consul/api v1.3.0 => github.com/hashicorp/consul/api v1.3.0
+# github.com/hashicorp/consul/api v1.3.0
 github.com/hashicorp/consul/api
 # github.com/hashicorp/errwrap v1.0.0
 github.com/hashicorp/errwrap
@@ -429,7 +429,7 @@ github.com/hashicorp/hil/parser
 github.com/hashicorp/hil/scanner
 # github.com/hashicorp/serf v0.8.5
 github.com/hashicorp/serf/coordinate
-# github.com/hashicorp/terraform v0.12.22
+# github.com/hashicorp/terraform v0.12.24
 ## explicit
 github.com/hashicorp/terraform/addrs
 github.com/hashicorp/terraform/backend
@@ -786,7 +786,7 @@ go.uber.org/zap/internal/bufferpool
 go.uber.org/zap/internal/color
 go.uber.org/zap/internal/exit
 go.uber.org/zap/zapcore
-# golang.org/x/crypto v0.0.0-20191206172530-e9b2fee46413
+# golang.org/x/crypto v0.0.0-20191112222119-e1110fd1c708
 golang.org/x/crypto/bcrypt
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/cast5
@@ -1153,7 +1153,6 @@ k8s.io/utils/integer
 k8s.io/utils/trace
 # sigs.k8s.io/yaml v1.1.0
 sigs.k8s.io/yaml
-# github.com/Azure/go-autorest/autorest => github.com/Azure/go-autorest/autorest v0.9.7
 # github.com/Azure/go-autorest => github.com/Azure/go-autorest v14.0.1+incompatible
-# github.com/hashicorp/consul/api => github.com/hashicorp/consul/api v1.3.0
-# github.com/hashicorp/consul => github.com/hashicorp/consul v1.6.2-0.20191112221531-8742361660b6
+# github.com/Azure/go-autorest/autorest => github.com/Azure/go-autorest/autorest v0.9.2
+# github.com/hashicorp/consul => github.com/hashicorp/consul v1.6.5
