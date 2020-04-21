@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"strings"
 
 	"github.com/Masterminds/sprig/v3"
 	"github.com/dciangot/fleepr/pkg/core"
@@ -19,6 +20,20 @@ type ConfIM struct {
 	Token    string `yaml:"token,omitempty"`
 }
 
+// ConfCloud ...
+type ConfCloud struct {
+	ID            string `yaml:"id"`
+	Type          string `yaml:"type"`
+	Username      string `yaml:"username"`
+	Password      string `yaml:"password"`
+	Host          string `yaml:"host"`
+	Tenant        string `yaml:"tenant"`
+	AuthURL       string `yaml:"auth_url,omitempty"`
+	AuthVersion   string `yaml:"auth_version"`
+	Domain        string `yaml:"domain,omitempty"`
+	ServiceRegion string `yaml:"service_region,omitempty"`
+}
+
 // IMClientFactory : Indigo-dc InfrastructureManager client factory
 type IMClientFactory struct {
 	configPath string
@@ -27,20 +42,25 @@ type IMClientFactory struct {
 
 // IMClient : Indigo-dc InfrastructureManager client
 type IMClient struct {
-	ConfigIM ConfIM
-	Context  core.InfrastructureConfig
-	State    core.InfrastructureState
+	ConfigIM    ConfIM
+	ConfigCloud ConfCloud
+	Context     core.InfrastructureConfig
+	State       core.InfrastructureState
 }
 
 // Init : initialize IMClient
 func (t IMClientFactory) Init() (*IMClient, error) {
 	context := core.InfrastructureConfig{}
+
+	// TODO: implement methods for IAM management
 	configIM := ConfIM{}
+	configCloud := ConfCloud{}
 
 	return &IMClient{
-		ConfigIM: configIM,
-		Context:  context,
-		State:    core.InfrastructureState{},
+		ConfigIM:    configIM,
+		ConfigCloud: configCloud,
+		Context:     context,
+		State:       core.InfrastructureState{},
 	}, nil
 }
 
@@ -48,13 +68,49 @@ func (t IMClientFactory) Init() (*IMClient, error) {
 func (t IMClient) Create() error {
 	tmpl := template.Must(template.New("IMClusterTemplate").Funcs(sprig.FuncMap()).Parse(IMClusterTemplate))
 
-	var b bytes.Buffer
-	err := tmpl.Execute(&b, t.Context)
+	var tmplBuffer bytes.Buffer
+	err := tmpl.Execute(&tmplBuffer, t.Context)
 	if err != nil {
 		return fmt.Errorf("Failed to compile the template: %s", err)
 	}
 
-	return fmt.Errorf("Operation not implemented")
+	headerCloudLine := map[string]string{}
+	authHeaderCloud := core.PrepareAuthHeaders(headerCloudLine)
+	fmt.Printf("HeaderCloud: %s", authHeaderCloud)
+
+	headerIMLine := map[string]string{}
+	authHeaderIM := core.PrepareAuthHeaders(headerIMLine)
+	fmt.Printf("HeaderIM: %s", authHeaderIM)
+
+	authHeaderList := []string{authHeaderCloud, authHeaderIM}
+	authHeader := strings.Join(authHeaderList, "\\n")
+
+	request := core.Request{
+		URL:         t.ConfigIM.Host,
+		RequestType: "POST",
+		Headers: map[string]string{
+			"Authorization": authHeader,
+			"Content-Type":  "text/yaml",
+		},
+		Content: tmplBuffer.Bytes(),
+	}
+
+	body, statusCode, err := core.MakeRequest(request)
+	if err != nil {
+		return err
+	}
+
+	if statusCode == 200 {
+		stringSplit := strings.Split(string(body), "/")
+		fmt.Println("InfrastructureID: ", stringSplit[len(stringSplit)-1])
+	} else {
+		return fmt.Errorf("Error code %d: %s", statusCode, body)
+	}
+
+	_ = strings.Split(string(body), "/")
+	// TODO: create .dodas dir and save infID
+
+	return nil
 }
 
 // Update : update the deployment with the current Infrastructure configuration
