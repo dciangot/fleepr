@@ -3,6 +3,7 @@ github.com/Masterminds/goutils
 # github.com/Masterminds/semver/v3 v3.0.1
 github.com/Masterminds/semver/v3
 # github.com/Masterminds/sprig/v3 v3.0.0
+## explicit
 github.com/Masterminds/sprig/v3
 # github.com/Microsoft/go-winio v0.4.12
 github.com/Microsoft/go-winio

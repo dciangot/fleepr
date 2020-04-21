@@ -18,11 +18,13 @@ import (
 	"os"
 
 	"github.com/dciangot/fleepr/cmd"
+	_ "github.com/rancher/rke/cmd"
 )
 
 func main() {
 	if _, ok := os.LookupEnv("BUILD_DOC"); ok {
 		cmd.BuildDoc()
 	}
-	cmd.Execute(VERSION)
+	//cmd.Execute(VERSION)
+
 }
